@@ -10,7 +10,7 @@ nv.addGraph(function() {
     showXAxis: true,
     showYAxis: true,
     transitionDuration: 250
-  })
+  }).showLegend(false)
   ;
 
   // chart3 sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart3, so need to chain separately
