@@ -1,6 +1,5 @@
 // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
 var chart2;
-var iso = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ");
 var tickMarks = [];
 var arr2 = [];
 
@@ -44,18 +43,8 @@ nv.addGraph(function() {
 
         });
 
-    //.tickFormat(d3.format(',.1f'));
-     // .tickFormat(function(d) {
-     //   var date = new Date(d);
-     //   return date;
-     // });
-
-    //.tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)); })
-
-
-
   chart2.yAxis
-    .axisLabel('Energy Consumption (kWh)')
+    .axisLabel('Energy Consumption (kW/h)')
     .tickFormat(d3.format(',.2f'))
     ;
 
@@ -87,6 +76,10 @@ function populate2() {
     tickMarks.push(arr[i].x);
   };
 
+  var now = data[0];
+  var last = data[0];
+  updateCard2(now, last);
+
   return [{
       values: arr,
       key: "Energy Consumption Forecast",
@@ -98,4 +91,10 @@ function populate2() {
       key: "Past Consumption",
       color: ""
     }];
+}
+
+function updateCard2(now, last) {
+  now[1] =  Math.floor(now[1] * 1000) / 1000;
+  last[1] =  Math.floor(last[1] * 1000) / 1000;
+  $('#card2').text("The estimate closest to last year is during " +  formatCardDate(now[0]) + ": we estimate " + now[1]+ "kWh, while we had " + last[1] +  "kWh last year.");
 }

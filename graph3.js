@@ -1,11 +1,9 @@
 // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
-var chart2;
-var iso = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ");
-var tickMarks = [];
-var arr2 = [];
+var chart3;
+var tickMarks3 = [];
 
 nv.addGraph(function() {
-  chart2 = nv.models.lineChart()
+  chart3 = nv.models.lineChart()
   .options({
     margin: {left: 100, bottom: 100},
     //x: function(d,i) { return i},
@@ -15,11 +13,11 @@ nv.addGraph(function() {
   })
   ;
 
-  // chart2 sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart2, so need to chain separately
-    chart2.xAxis
+  // chart3 sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart3, so need to chain separately
+    chart3.xAxis
          .axisLabel('Date')
          .rotateLabels(-65)
-         .tickValues(tickMarks)
+         .tickValues(tickMarks3)
          .tickFormat(function(d) { 
           var date = new Date(d);
           var date2 = new Date(d);
@@ -54,22 +52,22 @@ nv.addGraph(function() {
 
 
 
-  chart2.yAxis
+  chart3.yAxis
     .axisLabel('Energy Consumption (kWh)')
     .tickFormat(d3.format(',.2f'))
     ;
 
   d3.select('#chart3 svg')
-    .datum(populate2())
-    .call(chart2);
+    .datum(populate3())
+    .call(chart3);
 
   //TODO: Figure out a good way to do this automatically
-  nv.utils.windowResize(chart2.update);
-  //nv.utils.windowResize(function() { d3.select('#chart1 svg').call(chart2) });
+  nv.utils.windowResize(chart3.update);
+  //nv.utils.windowResize(function() { d3.select('#chart1 svg').call(chart3) });
 
-  chart2.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+  chart3.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
 
-  return chart2;
+  return chart3;
 });
 
 function populate3() {
@@ -79,17 +77,21 @@ function populate3() {
       arr.push({x: new Date(data[i][0]), y: data[i][1]});
   };
 
-  for(var i = 0; i < arr.length; i++) {
-    arr2[i] = {x: arr[i].x, y: arr[i].y + 500};
-  }
-
   for (var i = 0; i < arr.length; i+=4) {
-    tickMarks.push(arr[i].x);
+    tickMarks3.push(arr[i].x);
   };
+
+  updateCard3(arr[arr.length - 1].y);
 
   return [{
       values: arr,
       key: "Past Month's Consumption",
       color: "#667711"
     }];
+}
+
+
+function updateCard3(currUsage) {
+  currUsage =  Math.floor(currUsage * 1000) / 1000;
+  $('#card3').text("Current usage is " + currUsage + "kWh.");
 }

@@ -90,6 +90,10 @@ svg {
   margin:auto;
 }
 
+.currentDataWrapper {
+  text-align: center;
+}
+
 .footer { 
   width:100%;
   height:130px;
