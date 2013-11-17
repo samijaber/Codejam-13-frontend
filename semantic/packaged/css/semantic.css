@@ -2530,6 +2530,14 @@ body > .ui.grid {
   color: #00B5AD !important;
 }
 
+.ui.menu .pink.active.item,
+.ui.pink.menu .active.item {
+  border-color: #c34c91 !important;
+  color: #c34c91 !important;
+}
+
+ 
+
 /*--------------
     Inverted
 ---------------*/

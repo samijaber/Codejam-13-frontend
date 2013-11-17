@@ -1,61 +1,160 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
 
-<link href="novus-nvd3-764767a/src/nv.d3.css" rel="stylesheet" type="text/css">
+<head> 
 
-<style>
+  <meta charset="utf-8">
 
-body {
-  overflow-y:scroll;
+  <link href="novus-nvd3-764767a/src/nv.d3.css" rel="stylesheet" type="text/css">
+
+  <script src="novus-nvd3-764767a/lib/d3.v3.js"></script>
+  <script src="novus-nvd3-764767a/nv.d3.js"></script>
+  <script src="novus-nvd3-764767a/src/tooltip.js"></script>
+  <script src="novus-nvd3-764767a/src/utils.js"></script>
+  <script src="novus-nvd3-764767a/src/interactiveLayer.js"></script>
+  <script src="novus-nvd3-764767a/src/models/legend.js"></script>
+  <script src="novus-nvd3-764767a/src/models/axis.js"></script>
+  <script src="novus-nvd3-764767a/src/models/scatter.js"></script>
+  <script src="novus-nvd3-764767a/src/models/line.js"></script>
+  <script src="novus-nvd3-764767a/src/models/lineChart.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="chartwizard.css">
+
+  <!-- semantic -->
+
+ <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" type="text/css" href="semantic/packaged/css/semantic.css">
+  <link rel="stylesheet" type="text/css" href="homepage.css">
+  <link rel="stylesheet" type="text/css" href="tab.min.css">
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+  <script src="semantic.min.js"></script>
+  <script src="linechart.js"></script>
+  <script src="graph2.js"></script>
+  <script src="graph3.js"></script>
+
+</head>
+<body class='with-3d-shadow with-transitions' id="home">
+  <div class="masthead segment">
+    <div class="ui page grid">
+      <div class="column">
+        <div class="introduction">
+          <h1>MeatFlaps</h1>
+          <h2 class="ui header" style="margin-top:5px;color:#fff;text-align:center;">Save energy, save McGill.</h2>
+       </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prettycolours">
+    <div class="ui pointing secondary demo menu">
+      <a class="red item pagenav nav1 active" data-tab="first">Cute Dog</a>
+      <a class="blue item pagenav nav2" data-tab="second">16-hour Forecast</a>
+      <a class="green item pagenav nav3" data-tab="third">Historical Trend for Forecast</a>
+      <a class="purple item pagenav nav4" data-tab="fourth">Some other graph</a>
+      <a class="pink item pagenav nav5" data-tab="fourth">Meat flap</a>
+    </div>
+  </div>
+
+  <div class="redbull">
+    <div class="ui shape">
+      <div class="ui items">
+        <div class="item">
+          <div class="content">
+            <div class="name">Cute Dog</div>
+            <p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="graphItem" id="graph1">
+      <h2>Energy Consumption 16-hour Forecast</h2>
+      <div id="chart1" >
+        <svg style="height: 400px;"></svg>
+     </div>
+    </div>  
+
+    <div class="graphItem" id="graph2">
+      <h2>Historical Trends for 16-hour Forecast</h2>
+      <div id="chart2" >
+        <svg style="height: 400px;"></svg>
+     </div>
+    </div> 
+
+    <div class="graphItem" id="graph3">
+      <h2>Some other graph Sami made</h2>
+      <div id="chart3" >
+        <svg style="height: 400px;"></svg>
+     </div>
+    </div> 
+
+  </div>
+
+</body>
+
+<script>
+
+  
+  var anchor1Height;
+  var anchor2Height;
+  var anchor3Height;
+  var anchor4Height;
+
+  $(document).ready( function() { 
+    anchor2Height = $("#graph1").offset().top;
+    anchor3Height = $("#graph2").offset().top;
+    anchor4Height = $("#graph3").offset().top;
+  } );
+
+  function refreshButton(){
+    $(".pagenav").removeClass("active");
+  }
+
+  function scrollToAnchor(aid){
+    var aTag = $("#"+aid);
+    $('html,body').animate({scrollTop: aTag.offset().top},'slow');
 }
 
-text {
-  font: 12px sans-serif;
-}
+$(".pagenav").click(function() {
+   refreshButton();
+   $(this).addClass("active");
+});
 
-svg {
-  display: block;
-}
+$(".nav1").click(function() { 
+     // scrollToAnchor('graph1');
+});
+
+$(".nav2").click(function() { 
+     scrollToAnchor('graph1');
+});
+
+$(".nav3").click(function() { 
+     scrollToAnchor('graph2');
+});
+
+$(".nav4").click(function() { 
+     scrollToAnchor('graph3');
+});
 
 
-.nvd3 .nv-groups .nv-point {
-    stroke-opacity: 1 !important;
-    stroke-width: 3px;
-}
+$(window).scroll(function(e){ 
+  var navbarheight = 210;
+  $el = $($('.prettycolours')[0]);
+  console.log("ScrollTop " + $(this).scrollTop());
+  console.log("Offset " + navbarheight);
+  if ($(this).scrollTop() > navbarheight && $el.css('position')!="fixed"){ 
+    $('.prettycolours').css({'position': 'fixed', 'top': '0px'}); 
+  } 
+  if ($el.css('position') == "fixed" && $(this).scrollTop() < navbarheight)
+   { 
+     $el.css({'position': 'relative'});
+  }
+
+});
 
 
-#chart1 svg {
-  height: 700px;
-  min-width: 200px;
-  min-height: 100px;
-/*
-  margin: 50px;
-  Minimum height and width is a good idea to prevent negative SVG dimensions...
-  For example width should be =< margin.left + margin.right + 1,
-  of course 1 pixel for the entire chart would not be very useful, BUT should not have errors
-*/
+</script>
 
-}
-#chart1 {
-  margin-top: 200px;
-  margin-left: auto;
-}
-</style>
-<body class='with-3d-shadow with-transitions'>
-
-<div id="chart1" >
-  <svg style="height: 400px;"></svg>
-</div>
-
-<script src="novus-nvd3-764767a/lib/d3.v3.js"></script>
-<script src="novus-nvd3-764767a/nv.d3.js"></script>
-<script src="novus-nvd3-764767a/src/tooltip.js"></script>
-<script src="novus-nvd3-764767a/src/utils.js"></script>
-<script src="novus-nvd3-764767a/src/interactiveLayer.js"></script>
-<script src="novus-nvd3-764767a/src/models/legend.js"></script>
-<script src="novus-nvd3-764767a/src/models/axis.js"></script>
-<script src="novus-nvd3-764767a/src/models/scatter.js"></script>
-<script src="novus-nvd3-764767a/src/models/line.js"></script>
-<script src="novus-nvd3-764767a/src/models/lineChart.js"></script>
-
-<script src="linechart.js"></script>
+</html>
