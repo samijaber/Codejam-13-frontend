@@ -17,11 +17,29 @@ nv.addGraph(function() {
   // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
     chart.xAxis
          .axisLabel('Date')
-         .rotateLabels(-45)
+         .rotateLabels(-65)
          .tickValues(tickMarks)
          .tickFormat(function(d) { 
           var date = new Date(d);
-          return d3.time.format('%m/%d/%y, %H:%M')(date); 
+          var date2 = new Date(d);
+
+          if(date.getMinutes() == 0) {
+            if(date2.getHours == 0) { 
+              date2.setHours(23);
+            }
+            else { 
+              date2.setHours(date.getHours() - 1);
+            }            
+            date2.setMinutes(45);
+          }
+          else {
+            date2.setMinutes(date.getMinutes() - 15);
+          }
+
+          return (d3.time.format('%m/%d, ')(date2) +
+          d3.time.format('%H:%M')(date2) + 
+          "-" + 
+          d3.time.format('%H:%M')(date)); 
 
         });
 
@@ -120,6 +138,8 @@ function populate() {
   arr.push({x: new Date(2013, 11 -1, 09, 23, 15, 00, 00), y: 14458.237});
   arr.push({x: new Date(2013, 11 -1, 09, 23, 30, 00, 00), y: 14401.343});
   arr.push({x: new Date(2013, 11 -1, 09, 23, 45, 00, 00), y: 14390.64});
+  // arr.push({x: new Date(2013, 11 -1, 10, 00, 00, 00, 00), y: 14400.64});
+  // arr.push({x: new Date(2013, 11 -1, 10, 00, 15, 00, 00), y: 14458.237});
 
   for (var i = 0; i < arr.length; i+=4) {
     tickMarks.push(arr[i].x);
@@ -127,7 +147,7 @@ function populate() {
 
   return [{
       values: arr,
-      key: "Sample Output",
+      key: "Energy Consumption Forecast",
       color: "#667711"
     }];
 }
