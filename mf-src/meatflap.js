@@ -15,10 +15,10 @@ function getBuildingPowerData() {
 
 
 function initializeMap() {
-  var myLatlng = new google.maps.LatLng(45.487095,-73.709729);
+  var myLatlng = new google.maps.LatLng(45.467095,-73.709729);
   
   var mapOptions = {
-    zoom: 10,
+    zoom: 11,
     center: myLatlng,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
 	disableDefaultUI: false,

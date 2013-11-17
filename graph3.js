@@ -55,7 +55,7 @@ nv.addGraph(function() {
 
 
   chart2.yAxis
-    .axisLabel('Voltage (v)')
+    .axisLabel('Energy Consumption (kW/h)')
     .tickFormat(d3.format(',.2f'))
     ;
 

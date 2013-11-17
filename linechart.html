@@ -28,10 +28,14 @@
   <link rel="stylesheet" type="text/css" href="tab.min.css">
 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOvPIf-NuS4GVHTZE7PfWLszNFNO4Ln3g&v=3.exp&sensor=false"></script>
   <script src="semantic.min.js"></script>
   <script src="linechart.js"></script>
   <script src="graph2.js"></script>
   <script src="graph3.js"></script>
+  <script src="mf-src/heatmap.js"></script>
+  <script src="mf-src/meatflap.js"></script>
+  <script src="mf-src/heatmap-gmaps.js"></script>
 
 </head>
 <body class='with-3d-shadow with-transitions' id="home">
@@ -89,6 +93,10 @@
         <svg style="height: 400px;"></svg>
      </div>
     </div> 
+
+    <div class="bread">
+      <div id="heatmapArea" style="width: 100%; padding: 0px; height: 400px; cursor: pointer; background-color: rgb(229, 227, 223);" />
+    </div>
 
   </div>
 
