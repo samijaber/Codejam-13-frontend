@@ -24,7 +24,7 @@ nv.models.lineChart = function() {
     , tooltips = true
     , tooltip = function(key, x, y, e, graph) {
         return '<h3>' + key + '</h3>' +
-               '<p>' +  y + ' V used on ' + x + '</p>'
+               '<p>' +  y + ' kWh used on ' + x + '</p>'
       }
     , x
     , y

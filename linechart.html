@@ -36,7 +36,6 @@
   <script src="mf-src/heatmap.js"></script>
   <script src="mf-src/meatflap.js"></script>
   <script src="mf-src/heatmap-gmaps.js"></script>
-  <script src="/waypoints/waypoints.min.js"></script>
 
 </head>
 <body class='with-3d-shadow with-transitions' id="home">
@@ -78,31 +77,55 @@
     </div>
 
 
-    <div class="graphItem" id="graph1">
-      <h2>Energy Consumption 16-hour Forecast</h2>
-      <div id="chart1" >
-        <svg style="height: 400px;"></svg>
-     </div>
+    <div class="infoPage">
+      <div class="graphItem" id="graph1">
+        <h2>Energy Consumption 16-hour Forecast</h2>
+        <div id="chart1" >
+          <svg style="height: 400px;"></svg>
+       </div>
+
+       <div class="pageDescription">
+        The forecasted energy consumption at McGill per 15 minute intervals over the next 16 hours.
+       </div>
+      </div>
     </div>  
 
-    <div class="graphItem" id="graph2">
-      <h2>Historical Trends for 16-hour Forecast</h2>
-      <div id="chart2" >
-        <svg style="height: 400px;"></svg>
-     </div>
-    </div> 
+    <div class="infoPage">
+      <div class="graphItem" id="graph2">
+        <h2>Historical Trends for 16-hour Forecast</h2>
+        <div id="chart2" >
+          <svg style="height: 400px;"></svg>
+       </div>
 
-    <div class="graphItem" id="graph3">
-      <h2>Some other graph Sami made</h2>
-      <div id="chart3" >
-        <svg style="height: 400px;"></svg>
-     </div>
-    </div> 
+       <div class="pageDescription">
+        The forecasted energy consumption over the next 16 hours compared to the historical average.
+       </div>
+      </div> 
+    </div>
 
-    <div class="graphItem" id="meatflaps">
-      <h2>Current energy consumption map of McGill University</h2>
-      <div class="bread">
-        <div id="heatmapArea" style="width: 100%; padding: 0px; height: 400px; cursor: pointer; background-color: rgb(229, 227, 223);"></div>
+    <div class="infoPage">
+      <div class="graphItem" id="graph3">
+        <h2>Some other graph Sami made</h2>
+        <div id="chart3" >
+          <svg style="height: 400px;"></svg>
+       </div>
+
+       <div class="pageDescription">
+        Something else Sami never finished.
+       </div>
+      </div> 
+    </div>
+
+    <div class="infoPage">
+      <div class="graphItem" id="meatflaps">
+        <h2>Current Energy Consumption Map of McGill University</h2>
+        <div class="bread">
+          <div id="heatmapArea" style="width: 100%; padding: 0px; height: 500px; cursor: pointer; background-color: rgb(229, 227, 223);"></div>
+        </div>
+
+        <div class="pageDescription">
+        The heat map represents energy consumption across McGill university's downtown and Macdonald campuses.
+       </div>
       </div>
     </div>
   
@@ -129,6 +152,8 @@
     anchor3Height = $("#graph2").offset().top;
     anchor4Height = $("#graph3").offset().top;
     anchor5Height = $("#meatflaps").offset().top;
+
+    $('.infoPage').height($(window).height());
   } );
 
   function refreshButton(){
