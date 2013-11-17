@@ -82,15 +82,30 @@ svg {
     width: 100%;
 }
 
-.graphItem { 
-  padding-top:100px;
-}
-
-.currentDataWrapper { 
-  padding-top:100px;
+.graphItem, .currentDataWrapper { 
+  padding-top:60px;
 }
 
 .bread { 
   margin:auto;
 }
+
+.footer { 
+  width:100%;
+  height:130px;
+  background-color:#efefef;
+  padding-top: 20px;
+  text-align:center;
+}
+
+.footer h3 { 
+  font-weight: normal;
+}
+
+.footer h4 { 
+  font-weight: normal;
+}
+
+
+
 

@@ -100,13 +100,18 @@
     </div> 
 
     <div class="graphItem" id="meatflaps">
+      <h2>Current energy consumption map of McGill University</h2>
       <div class="bread">
-        <div id="heatmapArea" style="width: 100%; padding: 0px; height: 400px; cursor: pointer; background-color: rgb(229, 227, 223);" />
+        <div id="heatmapArea" style="width: 100%; padding: 0px; height: 400px; cursor: pointer; background-color: rgb(229, 227, 223);"></div>
       </div>
     </div>
+  
+  </div> <!-- redbull (padding) -->
 
-
-  </div>
+  <div class="footer">
+      <h3>McGill University Code Jam 2013</h3>
+      <h4>Team Segfault: Sami Jaber, Max Krogius, Tina Latif, Alex Norton, Deepanjan Roy</h4>
+    </div>
 
 </body>
 
@@ -135,10 +140,10 @@
     $('html,body').animate({scrollTop: aTag.offset().top},'slow');
 }
 
-$(".pagenav").click(function() {
-   refreshButton();
-   $(this).addClass("active");
-});
+// $(".pagenav").click(function() {
+//    refreshButton();
+//    $(this).addClass("active");
+// });
 
 $(".nav1").click(function() { 
      scrollToAnchor('currentData');
