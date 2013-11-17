@@ -36,6 +36,7 @@
   <script src="mf-src/heatmap.js"></script>
   <script src="mf-src/meatflap.js"></script>
   <script src="mf-src/heatmap-gmaps.js"></script>
+  <script src="/waypoints/waypoints.min.js"></script>
 
 </head>
 <body class='with-3d-shadow with-transitions' id="home">
@@ -174,45 +175,43 @@ $(window).scroll(function(e){
   }
 
   // anchor 1/2 transition
-  if($(this).scrollTop() > anchor2Height) { 
-    refreshButton();
-    $(".nav2").addClass("active");
-  }
-  if($(this).scrollTop() < anchor2Height) { 
+  if(isScrolledIntoView($("#currentData"))) { 
     refreshButton();
     $(".nav1").addClass("active");
   }
-
-  // anchor 2/3 transition
-  if($(this).scrollTop() > anchor3Height) { 
-    refreshButton();
-    $(".nav3").addClass("active");
-  }
-  if($(this).scrollTop() < anchor3Height) { 
+  if(isScrolledIntoView($("#graph1"))) { 
     refreshButton();
     $(".nav2").addClass("active");
   }
 
-  // // anchor 3/4 transition
-  // if($(this).scrollTop() > anchor4Height) { 
-  //   refreshButton();
-  //   $(".nav4").addClass("active");
-  // }
-  // if($(this).scrollTop() < anchor4Height) { 
-  //   refreshButton();
-  //   $(".nav3").addClass("active");
-  // }
+  // anchor 2/3 transition
+  if(isScrolledIntoView($("#graph2"))) { 
+    refreshButton();
+    $(".nav3").addClass("active");
+  }
 
-  // // anchor 4/5 transition
-  // if($(this).scrollTop() > anchor5Height) { 
-  //   refreshButton();
-  //   $(".nav5").addClass("active");
-  // }
-  // if($(this).scrollTop() < anchor5Height) { 
-  //   refreshButton();
-  //   $(".nav4").addClass("active");
-  // }
+  // anchor 3/4 transition
+  if(isScrolledIntoView($("#graph3"))) { 
+    refreshButton();
+    $(".nav4").addClass("active");
+  }
 
+  // anchor 4/5 transition
+  if(isScrolledIntoView($("#meatflaps"))) { 
+    refreshButton();
+    $(".nav5").addClass("active");
+  }
+
+  function isScrolledIntoView(elem)
+  {
+      var docViewTop = $(window).scrollTop();
+      var docViewBottom = docViewTop + $(window).height();
+
+      var elemTop = $(elem).offset().top;
+      var elemBottom = elemTop + $(elem).height();
+
+      return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+  }
 
 
 });
