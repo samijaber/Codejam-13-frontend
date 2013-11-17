@@ -1,0 +1,88 @@
+body {
+  overflow-y:scroll;
+  font-family: "Source Sans Pro";
+} 
+
+h1 { 
+  font-family: "Source Sans Pro";
+  font-size: 84px;
+  font-weight: bold;
+  text-align: center;
+}
+
+h2 { 
+  font-family: "Source Sans Pro";
+  font-size: 34px;
+  text-align: center;
+}
+
+text {
+  font: 12px sans-serif;
+}
+
+svg {
+  display: block;
+}
+
+
+.nvd3 .nv-groups .nv-point {
+    stroke-opacity: 1 !important;
+    stroke-width: 3px;
+}
+
+#chart1 svg {
+  height: 700px;
+  min-width: 200px;
+  min-height: 100px;
+/*  max-width:90%;*/
+  margin:auto;
+/*
+  margin: 50px;
+  Minimum height and width is a good idea to prevent negative SVG dimensions...
+  For example width should be =< margin.left + margin.right + 1,
+  of course 1 pixel for the entire chart would not be very useful, BUT should not have errors
+*/
+
+}
+#chart1 {
+  margin-top: 50px;
+  margin-left: auto;
+}
+
+.masthead {
+  position: relative;
+  overflow: hidden;
+  background-color: #C83215;
+  text-align: center;
+  padding-bottom: 50px;
+  padding-top:70px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0px;
+  border-bottom: none;
+}
+.masthead h1 {
+  font-size: 5em;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin: -20px 0px 0px;
+  padding-bottom: 0px;
+}
+
+.redbull { 
+  margin:auto;
+  width:90%;
+  padding-top:60px;
+  padding-bottom:60px;
+}
+
+.prettycolours {
+    position: relative;
+    z-index: 9999999999999;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.graphItem { 
+  padding-top:100px;
+}
+
