@@ -1,6 +1,7 @@
 // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
 var chart;
 var iso = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ");
+var tickMarks = [];
 
 nv.addGraph(function() {
   chart = nv.models.lineChart()
@@ -17,7 +18,12 @@ nv.addGraph(function() {
     chart.xAxis
          .axisLabel('Date')
          .rotateLabels(-45)
-         .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)); });
+         .tickValues(tickMarks)
+         .tickFormat(function(d) { 
+          var date = new Date(d);
+          return d3.time.format('%m/%d/%y, %H:%M')(date); 
+
+        });
 
     //.tickFormat(d3.format(',.1f'));
      // .tickFormat(function(d) {
@@ -114,6 +120,10 @@ function populate() {
   arr.push({x: new Date(2013, 11 -1, 09, 23, 15, 00, 00), y: 14458.237});
   arr.push({x: new Date(2013, 11 -1, 09, 23, 30, 00, 00), y: 14401.343});
   arr.push({x: new Date(2013, 11 -1, 09, 23, 45, 00, 00), y: 14390.64});
+
+  for (var i = 0; i < arr.length; i+=4) {
+    tickMarks.push(arr[i].x);
+  };
 
   return [{
       values: arr,
