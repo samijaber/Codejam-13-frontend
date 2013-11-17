@@ -24,7 +24,7 @@ nv.models.lineChart = function() {
     , tooltips = true
     , tooltip = function(key, x, y, e, graph) {
         return '<h3>' + key + '</h3>' +
-               '<p>' +  y + ' at ' + x + '</p>'
+               '<p>' +  y + ' V used on ' + x + '</p>'
       }
     , x
     , y
@@ -56,7 +56,6 @@ nv.models.lineChart = function() {
         x = xAxis.tickFormat()(lines.x()(e.point, e.pointIndex)),
         y = yAxis.tickFormat()(lines.y()(e.point, e.pointIndex)),
         content = tooltip(e.series.key, x, y, e, chart);
-
     nv.tooltip.show([left, top], content, null, null, offsetElement);
   };
 
