@@ -61,12 +61,16 @@
   </div>
 
   <div class="redbull">
-    <div class="ui shape">
-      <div class="ui items">
-        <div class="item">
-          <div class="content">
-            <div class="name">Cute Dog</div>
-            <p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+    
+
+    <div class="currentDataWrapper" id="currentData">
+      <div class="ui shape">
+        <div class="ui items">
+          <div class="item">
+            <div class="content">
+              <div class="name">Cute Dog</div>
+              <p class="description">This dog has some things going for it. Its pretty cute and looks like it'd be fun to cuddle up with.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -94,9 +98,12 @@
      </div>
     </div> 
 
-    <div class="bread">
-      <div id="heatmapArea" style="width: 100%; padding: 0px; height: 400px; cursor: pointer; background-color: rgb(229, 227, 223);" />
+    <div class="graphItem" id="meatflaps">
+      <div class="bread">
+        <div id="heatmapArea" style="width: 100%; padding: 0px; height: 400px; cursor: pointer; background-color: rgb(229, 227, 223);" />
+      </div>
     </div>
+
 
   </div>
 
@@ -104,16 +111,18 @@
 
 <script>
 
-  
   var anchor1Height;
   var anchor2Height;
   var anchor3Height;
   var anchor4Height;
+  var anchor5Height;
 
   $(document).ready( function() { 
+    anchor1Height = $("#currentData").offset().top;
     anchor2Height = $("#graph1").offset().top;
     anchor3Height = $("#graph2").offset().top;
     anchor4Height = $("#graph3").offset().top;
+    anchor5Height = $("#meatflaps").offset().top;
   } );
 
   function refreshButton(){
@@ -131,7 +140,7 @@ $(".pagenav").click(function() {
 });
 
 $(".nav1").click(function() { 
-     // scrollToAnchor('graph1');
+     scrollToAnchor('currentData');
 });
 
 $(".nav2").click(function() { 
@@ -144,6 +153,10 @@ $(".nav3").click(function() {
 
 $(".nav4").click(function() { 
      scrollToAnchor('graph3');
+});
+
+$(".nav5").click(function() { 
+     scrollToAnchor('meatflaps');
 });
 
 
@@ -159,6 +172,48 @@ $(window).scroll(function(e){
    { 
      $el.css({'position': 'relative'});
   }
+
+  // anchor 1/2 transition
+  if($(this).scrollTop() > anchor2Height) { 
+    refreshButton();
+    $(".nav2").addClass("active");
+  }
+  if($(this).scrollTop() < anchor2Height) { 
+    refreshButton();
+    $(".nav1").addClass("active");
+  }
+
+  // anchor 2/3 transition
+  if($(this).scrollTop() > anchor3Height) { 
+    refreshButton();
+    $(".nav3").addClass("active");
+  }
+  if($(this).scrollTop() < anchor3Height) { 
+    refreshButton();
+    $(".nav2").addClass("active");
+  }
+
+  // // anchor 3/4 transition
+  // if($(this).scrollTop() > anchor4Height) { 
+  //   refreshButton();
+  //   $(".nav4").addClass("active");
+  // }
+  // if($(this).scrollTop() < anchor4Height) { 
+  //   refreshButton();
+  //   $(".nav3").addClass("active");
+  // }
+
+  // // anchor 4/5 transition
+  // if($(this).scrollTop() > anchor5Height) { 
+  //   refreshButton();
+  //   $(".nav5").addClass("active");
+  // }
+  // if($(this).scrollTop() < anchor5Height) { 
+  //   refreshButton();
+  //   $(".nav4").addClass("active");
+  // }
+
+
 
 });
 
