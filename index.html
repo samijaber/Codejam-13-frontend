@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<head> 
+
+  <meta charset="utf-8">
+
+  <link href="novus-nvd3-764767a/src/nv.d3.css" rel="stylesheet" type="text/css">
+
+  <script src="novus-nvd3-764767a/lib/d3.v3.js"></script>
+  <script src="novus-nvd3-764767a/nv.d3.js"></script>
+  <script src="novus-nvd3-764767a/src/tooltip.js"></script>
+  <script src="novus-nvd3-764767a/src/utils.js"></script>
+  <script src="novus-nvd3-764767a/src/interactiveLayer.js"></script>
+  <script src="novus-nvd3-764767a/src/models/legend.js"></script>
+  <script src="novus-nvd3-764767a/src/models/axis.js"></script>
+  <script src="novus-nvd3-764767a/src/models/scatter.js"></script>
+  <script src="novus-nvd3-764767a/src/models/line.js"></script>
+  <script src="novus-nvd3-764767a/src/models/lineChart.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="chartwizard.css">
+
+  <!-- semantic -->
+
+ <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" type="text/css" href="semantic/packaged/css/semantic.css">
+  <link rel="stylesheet" type="text/css" href="homepage.css">
+  <link rel="stylesheet" type="text/css" href="tab.min.css">
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOvPIf-NuS4GVHTZE7PfWLszNFNO4Ln3g&v=3.exp&sensor=false"></script>
+  <script src="semantic.min.js"></script>
+  <script src="graphs/graph1.js"></script>
+  <script src="graphs/graph2.js"></script>
+  <script src="graphs/graph3.js"></script>
+  <script src="mf-src/heatmap.js"></script>
+  <script src="mf-src/meatflap.js"></script>
+  <script src="mf-src/heatmap-gmaps.js"></script>
+
+</head>
+<body class='with-3d-shadow with-transitions' id="home">
+  <div class="masthead segment">
+    <div class="ui page grid">
+      <div class="column">
+        <div class="introduction">
+          <h1>McGill Energy Monitor</h1>
+          <h2 class="ui header" style="margin-top:5px;color:#fff;text-align:center;">Save energy, save McGill.</h2>
+       </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="prettycolours">
+    <div class="ui pointing secondary demo menu">
+      <a class="red item pagenav nav1 active" data-tab="first">Current Usage</a>
+      <a class="blue item pagenav nav2" data-tab="second">16-hour Forecast</a>
+      <a class="green item pagenav nav3" data-tab="third">Historical Usage Trend</a>
+      <a class="purple item pagenav nav4" data-tab="fourth">Recent Usage</a>
+      <a class="pink item pagenav nav5" data-tab="fourth">Energy HeatMap</a>
+    </div>
+  </div>
+
+  <div class="redbull">
+    
+
+    <div class="currentDataWrapper" id="currentData">
+      <span class="ui shape">
+        <div class="ui items">
+          <div class="item" id="cardlink1">
+            <div class="content">
+              <div class="name">Peak Estimates</div>
+              <p class="description" id="card1"></p>
+            </div>
+          </div>
+        </div>
+      </span>
+
+      <span class="ui shape">
+        <div class="ui items">
+          <div class="item" id="cardlink2">
+            <div class="content">
+              <div class="name">Same time last year</div>
+              <p class="description" id="card2"></p>
+            </div>
+          </div>
+        </div>
+      </span>
+
+      <span class="ui shape">
+        <div class="ui items">
+          <div class="item" id="cardlink3">
+            <div class="content">
+              <div class="name">Current Usage</div>
+              <p class="description" id="card3"></p>
+            </div>
+          </div>
+        </div>
+      </span>
+    </div>
+
+
+<!--     <div class="infoPage">
+      <div class="graphItem" id="graph1">
+        <h2>Energy Consumption 16-hour Forecast</h2>
+        <div id="chart1" >
+          <svg style="height: 400px;"></svg>
+       </div>
+
+       <div class="pageDescription">
+        The forecasted energy consumption at McGill per 15 minute intervals over the next 16 hours.
+       </div>
+      </div>
+    </div>  -->
+
+    <div class="infoPage" id="graph1">
+      <div class="titleSection">
+        <div class="titleBox" style="height:50px;">
+          <h2>Energy Consumption 16-hour Forecast</h2>
+        </div>
+      </div>
+      <div class="graphSection">
+        <div class="graphBox" style="height:400px;">
+          <div id="chart1" >
+            <svg style="height: 400px;"></svg>
+          </div>
+        </div>
+      </div>
+      <div class="descriptionSection">
+        <div class="descriptionBox" style="height:100px;">
+          <div class="pageDescription">
+            The forecasted energy consumption at McGill per 15 minute intervals over the next 16 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- 
+    <div class="infoPage">
+      <div class="graphItem" id="graph2">
+        <h2>Historical Trends for 16-hour Forecast</h2>
+        <div id="chart2" >
+          <svg style="height: 400px;"></svg>
+       </div>
+
+       <div class="pageDescription">
+        The forecasted energy consumption over the next 16 hours compared to the historical average.
+       </div>
+      </div> 
+    </div> -->
+
+    <div class="infoPage" id="graph2">
+      <div class="titleSection">
+        <div class="titleBox" style="height:50px;">
+          <h2>Historical Trends for 16-hour Forecast</h2>
+        </div>
+      </div>
+      <div class="graphSection">
+        <div class="graphBox" style="height:400px;">
+          <div id="chart2" >
+            <svg style="height: 400px;"></svg>
+          </div>
+        </div>
+      </div>
+      <div class="descriptionSection">
+        <div class="descriptionBox" style="height:100px;">
+          <div class="pageDescription">
+            The forecasted energy consumption over the next 16 hours, compared to the same point in time last year.
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--     <div class="infoPage">
+      <div class="graphItem" id="graph3">
+        <h2>Some other graph Sami made</h2>
+        <div id="chart3" >
+          <svg style="height: 400px;"></svg>
+       </div>
+
+       <div class="pageDescription">
+        Something else Sami never finished.
+       </div>
+      </div> 
+    </div> -->
+
+    <div class="infoPage" id="graph3">
+      <div class="titleSection">
+        <div class="titleBox" style="height:50px;">
+          <h2>Recent Energy Usage</h2>
+        </div>
+      </div>
+      <div class="graphSection">
+        <div class="graphBox" style="height:400px;">
+          <div id="chart3" >
+            <svg style="height: 400px;"></svg>
+          </div>
+        </div>
+      </div>
+      <div class="descriptionSection">
+        <div class="descriptionBox" style="height:100px;">
+          <div class="pageDescription">
+            Energy consumption by McGill University over the last 8 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<!--     <div class="infoPage">
+      <div class="graphItem" id="meatflaps">
+        <h2>Current Energy Consumption Map of McGill University</h2>
+        <div class="bread">
+          <div id="heatmapArea" style="width: 100%; padding: 0px; height: 500px; cursor: pointer; background-color: rgb(229, 227, 223);"></div>
+        </div>
+
+        <div class="pageDescription">
+        The heat map represents energy consumption across McGill university's downtown and Macdonald campuses.
+       </div>
+      </div>
+    </div> -->
+
+    <div class="infoPage" id="meatflaps">
+      <div class="titleSection">
+        <div class="titleBox" style="height:50px;">
+          <h2>Current Energy Consumption Map of McGill University</h2>
+        </div>
+      </div>
+      <div class="graphSection">
+        <div class="graphBox" style="height:400px;">
+          <div class="bread">
+            <div id="heatmapArea" style="width: 100%; padding: 0px; height: 400px; cursor: pointer; background-color: rgb(229, 227, 223);"></div>
+          </div>
+        </div>
+      </div>
+      <div class="descriptionSection">
+        <div class="descriptionBox" style="height:100px;">
+          <div class="pageDescription">
+        The heat map represents the current energy consumption across McGill university's downtown and Macdonald campuses.
+       </div>
+        </div>
+      </div>
+    </div>
+  
+  </div> <!-- redbull (padding) -->
+
+  <div class="footer">
+      <h3>McGill University Code Jam 2013</h3>
+      <h4>Team Segfault: Sami Jaber, Max Krogius, Tina Latif, Alex Norton, Deepanjan Roy</h4>
+    </div>
+
+</body>
+
+<script>
+
+  var anchor1Height;
+  var anchor2Height;
+  var anchor3Height;
+  var anchor4Height;
+  var anchor5Height;
+
+  $(document).ready( function() { 
+    anchor1Height = $("#currentData").offset().top;
+    anchor2Height = $("#graph1").offset().top;
+    anchor3Height = $("#graph2").offset().top;
+    anchor4Height = $("#graph3").offset().top;
+    anchor5Height = $("#meatflaps").offset().top;
+
+    var totalHeight = $(window).height() - 35;
+
+    $('.infoPage').height($(window).height()-35);
+
+    $('.titleSection').height(totalHeight*0.15);
+    $('.titleBox').css("padding-top", (totalHeight*0.15 - 50)/2);
+
+    $('.graphSection').height(totalHeight*0.6);
+    $('.graphBox').css("padding-top", (totalHeight*0.60 - 400)/2);
+
+    $('.descriptionSection').height(totalHeight*0.25);
+    $('.descriptionBox').css("padding-top", (totalHeight*0.25 - 100)/2);
+  } );
+
+  function refreshButton(){
+    $(".pagenav").removeClass("active");
+  }
+
+  function scrollToAnchor(aid){
+    var aTag = $("#"+aid);
+    $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+}
+
+// $(".pagenav").click(function() {
+//    refreshButton();
+//    $(this).addClass("active");
+// });
+
+  $("#cardlink1").click(function() { 
+    // scrollToAnchor('graph1');
+    $(".nav2").trigger("click");
+  })
+
+  $("#cardlink2").click(function() { 
+    // scrollToAnchor('graph2');
+    $(".nav3").trigger("click");
+  })
+
+  $("#cardlink3").click(function() { 
+    // scrollToAnchor('graph3');
+    $(".nav4").trigger("click");
+  })
+
+$(".nav1").click(function() { 
+     scrollToAnchor('currentData');
+});
+
+$(".nav2").click(function() { 
+     scrollToAnchor('graph1');
+});
+
+$(".nav3").click(function() { 
+     scrollToAnchor('graph2');
+});
+
+$(".nav4").click(function() { 
+     scrollToAnchor('graph3');
+});
+
+$(".nav5").click(function() { 
+     scrollToAnchor('meatflaps');
+});
+
+
+$(window).scroll(function(e){ 
+  var navbarheight = 210;
+  $el = $($('.prettycolours')[0]);
+  
+  if ($(this).scrollTop() > navbarheight && $el.css('position')!="fixed"){ 
+    $('.prettycolours').css({'position': 'fixed', 'top': '0px'}); 
+  } 
+  if ($el.css('position') == "fixed" && $(this).scrollTop() < navbarheight)
+   { 
+     $el.css({'position': 'relative'});
+  }
+
+  // anchor 1/2 transition
+  if(isScrolledIntoView($("#currentData"))) { 
+    refreshButton();
+    $(".nav1").addClass("active");
+  }
+  if(isScrolledIntoView($("#graph1"))) { 
+    refreshButton();
+    $(".nav2").addClass("active");
+  }
+
+  // anchor 2/3 transition
+  if(isScrolledIntoView($("#graph2"))) { 
+    refreshButton();
+    $(".nav3").addClass("active");
+  }
+
+  // anchor 3/4 transition
+  if(isScrolledIntoView($("#graph3"))) { 
+    refreshButton();
+    $(".nav4").addClass("active");
+  }
+
+  // anchor 4/5 transition
+  if(isScrolledIntoView($("#meatflaps"))) { 
+    refreshButton();
+    $(".nav5").addClass("active");
+  }
+
+  function isScrolledIntoView(elem)
+  {
+      var docViewTop = $(window).scrollTop();
+      var docViewBottom = docViewTop + $(window).height();
+
+      var elemTop = $(elem).offset().top;
+      var elemBottom = elemTop + $(elem).height();
+
+      return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+  }
+
+
+});
+
+
+</script>
+
+</html>
