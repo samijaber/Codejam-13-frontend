@@ -1,6 +1,10 @@
+$.get('/dashboard_data3', function (results) { 
+
 // Wrapping in nv.addGraph allows for '0 timeout render', stores rendered charts in nv.graphs, and may do more in the future... it's NOT required
 var chart3;
 var tickMarks3 = [];
+
+var data3 = JSON.parse(results);
 
 nv.addGraph(function() {
   chart3 = nv.models.lineChart()
@@ -73,13 +77,17 @@ nv.addGraph(function() {
 function populate3() {
   var arr = [];
 
-  for (var i = 0; i < data.length; i++) {
-      arr.push({x: new Date(data[i][0]), y: data[i][1]});
+  for (var i = 0; i < data3.length; i++) {
+      if (data3[i][1] === null)
+          break;
+
+      arr.push({x: new Date(data3[i][0]), y: data3[i][1]});
   };
 
   for (var i = 0; i < arr.length; i+=4) {
     tickMarks3.push(arr[i].x);
   };
+
 
   updateCard3(arr[arr.length - 1].y);
 
@@ -95,3 +103,5 @@ function updateCard3(currUsage) {
   currUsage =  Math.floor(currUsage * 1000) / 1000;
   $('#card3').text("Current energy consumption at McGill University is " + currUsage + " kWh.");
 }
+});
+

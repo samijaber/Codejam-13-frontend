@@ -9,8 +9,11 @@ function getBuildingPowerData() {
 	//	mapData = data	
 	//	initializeMap();
 	//});
-	mapData = $.parseJSON('{ "max": 10, "data": [ {"lat": 45.406887, "lng":-73.942158, "count": 10.5}, {"lat": 45.506828, "lng":-73.574116, "count": 9.9}, {"lat": 45.503941, "lng":-73.580639, "count": 2}, {"lat": 45.492871, "lng":-73.578923, "count": 1}] }');
-	initializeMap();
+    $.get('/heatmap_data', function (data) {
+        mapData = JSON.parse(data);
+        initializeMap();
+    });
+	
 }
 
 
