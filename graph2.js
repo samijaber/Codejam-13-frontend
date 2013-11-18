@@ -96,5 +96,5 @@ function populate2() {
 function updateCard2(now, last) {
   now[1] =  Math.floor(now[1] * 1000) / 1000;
   last[1] =  Math.floor(last[1] * 1000) / 1000;
-  $('#card2').text("The estimate closest to last year is during " +  formatCardDate(now[0]) + ": we estimate " + now[1]+ "kWh, while we had " + last[1] +  "kWh last year.");
+  $('#card2').text("The estimate closest to last year is during " +  formatCardDate(now[0]) + ": we estimate " + now[1]+ " kWh, while we had " + last[1] +  " kWh last year.");
 }

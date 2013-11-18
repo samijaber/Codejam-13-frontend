@@ -93,5 +93,5 @@ function populate3() {
 
 function updateCard3(currUsage) {
   currUsage =  Math.floor(currUsage * 1000) / 1000;
-  $('#card3').text("Current usage is " + currUsage + "kWh.");
+  $('#card3').text("Current energy consumption at McGill University is " + currUsage + " kWh.");
 }

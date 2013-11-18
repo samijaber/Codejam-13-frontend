@@ -128,5 +128,5 @@ function formatCardDate(d) {
 function updateCard1(max, min) {
   max[1] =  Math.floor(max[1] * 1000) / 1000;
   min[1] =  Math.floor(min[1] * 1000) / 1000;
-  $('#card1').text("The highest estimated value is " +  max[1] + "kWh during " + formatCardDate(max[0]) + ". The lowest estimated value is " + min[1] + "kWh during " + formatCardDate(min[0]) + ".");
+  $('#card1').text("Over the next 16 hours, the highest estimated energy consumption is " +  max[1] + " kWh during " + formatCardDate(max[0]) + ". The lowest estimated energy consumption is " + min[1] + " kWh during " + formatCardDate(min[0]) + ".");
 }
