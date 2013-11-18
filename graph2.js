@@ -88,7 +88,7 @@ function populate2() {
 
     {
       values: arr2,
-      key: "Past Consumption",
+      key: "Last Year's Consumption",
       color: ""
     }];
 }
